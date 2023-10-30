@@ -15,12 +15,15 @@ app.use(morgan('dev'));
 app.use(helmet());
 // END MIDDLEWARE //
 // START ROUTES //
+
 app.use((req, res, next)=> {
     if (req.path.startsWith('/server')) {
         req.url = req.url.replace('/server', ''); // strip /server from the path
     }
     next();
 })
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
