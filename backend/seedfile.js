@@ -1,6 +1,6 @@
 const State = require('./models/State.js')
 //establish connection to MONGODB
-require('./config/database.js')
+require('./config/db.js')
 //insert all these objects into the 'states' collection
 
 
