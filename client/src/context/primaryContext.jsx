@@ -22,3 +22,4 @@ export const PrimaryProvider = ({children}) => {
         </primaryContext.Provider>
     )
 }
+export default PrimaryProvider;
