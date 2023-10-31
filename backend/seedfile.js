@@ -1,8 +1,8 @@
-const State = require('./models/State.js')
-//establish connection to MONGODB
-require('./config/db.js')
-//insert all these objects into the 'states' collection
+const State = require('./models/State.js');
 
+// establish connection to MONGO
+require('./config/db.js')
+// instert all these objects into the "states" collection
 
 const states = [
     { name: 'AL', tax: 0.06, tuitionAssistanceProgram: true },
@@ -57,10 +57,8 @@ const states = [
 ];
 
 const insert = async () => {
-    // dont want to enter all the states twice
-    await State.deleteMany({});
+    // dont want to enter all the states twice 
+    await State.deleteMany()
     await State.insertMany(states);
-
-};
-
-insert();
+} 
+insert()

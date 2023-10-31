@@ -9,6 +9,8 @@ export const PrimaryProvider = ({children}) => {
     const [states, setStates] = useState([]);
 
     // return provider div
+console.log(states);
+
     return (
         <primaryContext.Provider value={{ 
             camps, 

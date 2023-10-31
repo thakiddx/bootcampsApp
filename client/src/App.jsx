@@ -1,38 +1,54 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import NavBar from '../components/NavBar/index.jsx'
-import CampsDisplay from './pages/CampDisplay'
-import CampForm from './CampForm'
+import Navbar from './components/Navbar'
+import CampsDisplay from './pages/CampsDisplay'
+import CampForm from './pages/CampForm'
 import SingleCamp from './pages/SingleCamp'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import axios from 'axios'
-
+import { primaryContext } from './context/primaryContext'
 
 function App() {
   // go get states data, put in context
 
+  const { setStates, setCamps } = useContext(primaryContext);
+  
+
   useEffect(() => {
     try {
       axios({
-        method: 'GET',
+        method: "GET",
         url: "/server/states"
-      }).then(response => {
-        console.log(response.data)
+      }).then((response) => {
         // The states data should be in response.data
+        setStates(response.data)
       })
-    } catch (error) {
-      console.log(error)
+    }catch (err) {
+      console.error(err)
     }
-  }, [])
+
+    try {
+      axios({
+        method: "GET",
+        url: "/server/camps"
+      }).then((response) => {
+        // The states data should be in response.data
+        setCamps(response.data)
+      })
+    }catch (err) {
+      console.error(err)
+    }
+    
+  }, []);
 
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <Routes>
-        <Route path="/" element={<CampsDisplay />} />
-        <Route path="/camps/new" element={<CampForm />} />
+        <Route path="/" element={ <CampsDisplay />  }  />
+        <Route path="/camps/new" element={ <CampForm />  }  />
         {/* query, param, put it into context */}
-        <Route path="/camps/:campId" element={<SingleCamp />} />
+        <Route path="/camps/:campId" element={ <SingleCamp />  }  />
       </Routes>
     </div>
   )
