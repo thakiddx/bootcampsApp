@@ -78,12 +78,30 @@ app.get("/camps", async (req, res) => {
     }
 });
 
+// UPDATE
+app.put("/camps/:bootcampId", async (req, res) => {
+    try {
+        let dbResponse = await Bootcamp.findByIdAndUpdate(req.params.bootcampId, req.body);
+        res.status(200).send(dbResponse);
+    } catch(err) {
+        res.status(400).send("error deleting camp")
+    }
+});
+
+app.delete('/camps/:bootcampId', async (req, res) => {
+    try {
+        let dbResponse = await Bootcamp.findByIdAndDelete(req.params.bootcampId);
+        res.status(200).send(dbResponse)
+    } catch(err) {
+        res.status(400).send("error deleting camp")
+    }
+});
 
 
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  });
+});
 
 // END ROUTES //
 

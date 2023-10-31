@@ -1,27 +1,31 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 export const primaryContext = createContext();
 
-export const PrimaryProvider = ({children}) => {
+
+const PrimaryProvider = ({children}) => {
 
     // state
     const [camps, setCamps] = useState([]);
     const [states, setStates] = useState([]);
+    const [campToEdit, setCampToEdit] = useState(null);
 
+    console.log(states);
     // return provider div
-console.log(states);
-
     return (
-        <primaryContext.Provider value={{ 
+        <primaryContext.Provider value={{
             camps, 
-            setCamps ,
+            setCamps,
 
-            states,
-            setStates
-            
-        }}  >
+            states, 
+            setStates,
+
+            campToEdit, 
+            setCampToEdit
+        }}   >
             {children}
         </primaryContext.Provider>
     )
 }
+
 export default PrimaryProvider;
